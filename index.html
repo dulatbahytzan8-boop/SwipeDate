@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwipeDate — Выбор места за 5 минут</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#0f172a;color:#fff;overflow-x:hidden}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+.hero{text-align:center;padding:80px 20px}
+.hero h1{font-size:42px;margin-bottom:20px}
+.hero p{font-size:18px;color:#cbd5e1;margin-bottom:30px}
+.btn{
+background:#ff3b5c;
+padding:14px 28px;
+border-radius:40px;
+text-decoration:none;
+color:#fff;
+font-weight:600;
+display:inline-block;
+transition:0.3s;
+}
+.btn:hover{background:#ff1e46;transform:scale(1.05)}
+
+.section{padding:80px 20px;text-align:center}
+.section h2{font-size:32px;margin-bottom:30px}
+
+.cards-wrapper{
+position:relative;
+width:320px;
+height:500px;
+margin:40px auto;
+}
+
+.card{
+position:absolute;
+width:100%;
+height:100%;
+background:#1e293b;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+cursor:grab;
+transition:transform 0.3s ease;
+display:flex;
+flex-direction:column;
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.card-content{
+padding:20px;
+flex:1;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.badge{
+position:absolute;
+top:20px;
+left:20px;
+background:#22c55e;
+padding:8px 16px;
+border-radius:20px;
+font-weight:600;
+opacity:0;
+}
+
+.badge.nope{
+background:#ef4444;
+left:auto;
+right:20px;
+}
+
+.match-screen{
+display:none;
+text-align:center;
+padding:40px;
+}
+
+.match-screen h3{
+font-size:28px;
+margin-bottom:20px;
+color:#22c55e;
+}
+
+.footer{
+text-align:center;
+padding:40px;
+color:#94a3b8;
+font-size:14px;
+}
+
+@media(max-width:500px){
+.hero h1{font-size:30px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<div class="container">
+<h1>Выберите место для свидания за 5 минут</h1>
+<p>Без споров. Без 40 минут в 2ГИС. Просто свайпайте — и если совпало, решение принято.</p>
+<a href="#swipe" class="btn">Попробовать сейчас</a>
+</div>
+</div>
+
+<div class="section" id="swipe">
+<h2>Свайпайте вместе</h2>
+
+<div class="cards-wrapper" id="cards">
+</div>
+
+<div class="match-screen" id="match">
+<h3>🎉 Совпадение!</h3>
+<p id="matchName"></p>
+<br>
+<a href="#" id="mapLink" class="btn" target="_blank">Открыть карту</a>
+</div>
+</div>
+
+<div class="section">
+<h2>Почему это работает?</h2>
+<p style="max-width:700px;margin:0 auto;color:#cbd5e1;">
+Пары тратят 20–60 минут на выбор места. SwipeDate превращает выбор в игру.
+Формат свайпов уже доказал свою эффективность в сервисах знакомств.
+Мы адаптировали его под выбор заведений.
+</p>
+</div>
+
+<div class="footer">
+SwipeDate MVP для проверки гипотезы на рынке Казахстана
+</div>
+
+<script>
+const places = [
+{
+name:"Кофейня Sunrise",
+img:"https://images.unsplash.com/photo-1509042239860-f550ce710b93",
+map:"https://go.2gis.com/"
+},
+{
+name:"Ресторан Terra",
+img:"https://images.unsplash.com/photo-1555992336-03a23c7b20ee",
+map:"https://maps.google.com/"
+},
+{
+name:"Бар SkyLounge",
+img:"https://images.unsplash.com/photo-1514933651103-005eec06c04b",
+map:"https://go.2gis.com/"
+}
+];
+
+const cardsContainer = document.getElementById("cards");
+const matchScreen = document.getElementById("match");
+const matchName = document.getElementById("matchName");
+const mapLink = document.getElementById("mapLink");
+
+let currentIndex = 0;
+
+function createCard(place){
+const card = document.createElement("div");
+card.classList.add("card");
+
+card.innerHTML = `
+<div class="badge">ИДЁМ</div>
+<div class="badge nope">НЕТ</div>
+<img src="${place.img}">
+<div class="card-content">
+<h3>${place.name}</h3>
+<p>Свайпните вправо если нравится</p>
+</div>
+`;
+
+let startX = 0;
+
+card.addEventListener("mousedown",(e)=>{
+startX = e.clientX;
+document.onmousemove = (e)=>{
+let moveX = e.clientX - startX;
+card.style.transform = `translateX(${moveX}px) rotate(${moveX/10}deg)`;
+
+if(moveX > 100){
+card.querySelector(".badge").style.opacity = 1;
+}
+if(moveX < -100){
+card.querySelector(".nope").style.opacity = 1;
+}
+};
+
+document.onmouseup = (e)=>{
+let moveX = e.clientX - startX;
+
+if(moveX > 150){
+showMatch(place);
+}
+card.remove();
+document.onmousemove = null;
+document.onmouseup = null;
+};
+});
+
+return card;
+}
+
+function showMatch(place){
+matchScreen.style.display = "block";
+matchName.innerText = place.name;
+mapLink.href = place.map;
+}
+
+function loadCard(){
+if(currentIndex < places.length){
+const card = createCard(places[currentIndex]);
+cardsContainer.appendChild(card);
+currentIndex++;
+}
+}
+
+loadCard();
+</script>
+
+</body>
+</html>
