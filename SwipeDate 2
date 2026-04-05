@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwipeDate Алматы — Идеи для свиданий за 30 секунд</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff3b5c;
+            --secondary: #6366f1;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-main); line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Typography */
+        h1, h2, h3 { font-weight: 800; line-height: 1.2; }
+        .text-center { text-align: center; }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            display: inline-block;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(255, 59, 92, 0.3);
+        }
+        .btn:hover { transform: scale(1.05); background: #ff1e46; }
+
+        /* Hero Section */
+        .hero { padding: 100px 0 60px; text-align: center; background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%); }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; }
+        .hero p { font-size: 20px; color: var(--text-muted); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero .small { font-size: 14px; color: #64748b; margin-top: 15px; }
+
+        /* Sections */
+        .section { padding: 80px 0; }
+        .section h2 { font-size: 32px; margin-bottom: 40px; text-align: center; }
+
+        /* Grid Layouts */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card-feature { background: var(--card-bg); padding: 30px; border-radius: 24px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.05); }
+        
+        /* Swipe Mechanic (Functional) */
+        .swipe-container { position: relative; width: 320px; height: 450px; margin: 0 auto; perspective: 1000px; }
+        .swipe-card {
+            position: absolute; width: 100%; height: 100%;
+            background: var(--card-bg); border-radius: 24px; overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            cursor: grab; transition: transform 0.1s;
+        }
+        .swipe-card img { width: 100%; height: 60%; object-fit: cover; pointer-events: none; }
+        .swipe-card-content { padding: 20px; }
+        
+        /* Categories */
+        .cat-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .cat-tag { background: #334155; padding: 12px 24px; border-radius: 100px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .cat-tag:hover { background: var(--primary); }
+
+        /* Business Block */
+        .business-promo { background: linear-gradient(135deg, #4c1d95 0%, #1e1b4b 100%); padding: 60px; border-radius: 32px; text-align: center; }
+        
+        /* Footer */
+        .footer { padding: 60px 0; border-top: 1px solid #1e293b; color: var(--text-muted); font-size: 14px; }
+        .footer a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .section { padding: 50px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Куда пойти на свидание в Алматы?</h1>
+            <p>SwipeDate подберет идею за 30 секунд — просто свайпай и выбирай</p>
+            <a href="#swipe" class="btn">👉 Начать свайпать</a>
+            <p class="small">Без регистрации • Быстро • Только проверенные места</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>Кому подойдет SwipeDate?</h2>
+            <div class="grid">
+                <div class="card-feature">
+                    <h3>🔍 Тем, кто не знает, куда пойти</h3>
+                    <p>Не нужно тратить часы на поиск — мы уже подобрали варианты</p>
+                </div>
+                <div class="card-feature">
+                    <h3>❤️ Тем, кто идет на первое свидание</h3>
+                    <p>Подскажем места, где комфортно и без неловкости</p>
+                </div>
+                <div class="card-feature">
+                    <h3>✨ Парам для разнообразия</h3>
+                    <p>Новые идеи, чтобы свидания не превращались в «как обычно»</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: #111827;">
+        <div class="container text-center">
+            <h2>Все просто</h2>
+            <div class="grid" style="margin-bottom: 40px;">
+                <div class="card-feature" style="border: none; background: transparent;">
+                    <h3 style="color: var(--primary);">01.</h3>
+                    <h4>Выбираешь настроение</h4>
+                    <p>Романтика, актив или поесть</p>
+                </div>
+                <div class="card-feature" style="border: none; background: transparent;">
+                    <h3 style="color: var(--primary);">02.</h3>
+                    <h4>Свайпаешь идеи</h4>
+                    <p>Как в Tinder — нравится или нет</p>
+                </div>
+                <div class="card-feature" style="border: none; background: transparent;">
+                    <h3 style="color: var(--primary);">03.</h3>
+                    <h4>Идешь на свидание</h4>
+                    <p>Без долгих раздумий и споров</p>
+                </div>
+            </div>
+            <a href="#swipe" class="btn">👉 Попробовать сейчас</a>
+        </div>
+    </section>
+
+    <section class="section" id="swipe">
+        <div class="container">
+            <h2>Популярные идеи</h2>
+            <div class="swipe-container" id="swipeRoot">
+                </div>
+            <div id="matchResult" style="display:none; text-align:center; margin-top: 20px;">
+                <h3 style="color: #22c55e;">🎉 Отличный выбор!</h3>
+                <p id="matchName"></p>
+                <br>
+                <a href="#" class="btn" style="background:#22c55e">Посмотреть на карте</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>Выбери настроение</h2>
+            <div class="cat-list">
+                <div class="cat-tag">💘 Романтика</div>
+                <div class="cat-tag">🍽️ Поесть</div>
+                <div class="cat-tag">🎯 Актив</div>
+                <div class="cat-tag">🌃 Вечерний вайб</div>
+                <div class="cat-tag">🎉 Необычные места</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="business-promo">
+                <h2>Приводим клиентов в ваше заведение</h2>
+                <p style="margin-bottom: 30px;">Разместите свое заведение и получайте новых гостей без сложного маркетинга</p>
+                <div class="grid" style="text-align: left; margin-bottom: 30px;">
+                    <div>✅ Поток клиентов</div>
+                    <div>✅ Ваша целевая аудитория</div>
+                    <div>✅ Быстрый старт</div>
+                </div>
+                <a href="#" class="btn" style="background: #fff; color: #4c1d95;">👉 Разместить заведение</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section text-center">
+        <div class="container">
+            <h2>Уже помогает находить идеи</h2>
+            <div class="grid">
+                <div>
+                    <div style="font-size: 40px; font-weight: 800; color: var(--primary);">500+</div>
+                    <p>идей свиданий</p>
+                </div>
+                <div>
+                    <div style="font-size: 40px; font-weight: 800; color: var(--primary);">1000+</div>
+                    <p>пользователей</p>
+                </div>
+                <div>
+                    <div style="font-size: 40px; font-weight: 800; color: var(--primary);">24/7</div>
+                    <p>новые места</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer text-center">
+        <div class="container">
+            <div style="margin-bottom: 20px;">
+                <a href="#">О сервисе</a>
+                <a href="#">Для заведений</a>
+                <a href="#">Контакты</a>
+            </div>
+            <p>© 2024 SwipeDate. Алматы. Идеи для вашего вечера.</p>
+        </div>
+    </footer>
+
+    <script>
+        const ideas = [
+            { name: "Ужин с видом на город", img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400" },
+            { name: "Боулинг и коктейли", img: "https://images.unsplash.com/photo-1538510126044-173309930858?w=400" },
+            { name: "Прогулка + кофе", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400" }
+        ];
+
+        const root = document.getElementById('swipeRoot');
+        const matchRes = document.getElementById('matchResult');
+
+        function createCard(data) {
+            const el = document.createElement('div');
+            el.className = 'swipe-card';
+            el.innerHTML = `
+                <img src="${data.img}">
+                <div class="swipe-card-content">
+                    <h3>${data.name}</h3>
+                    <p>Свайпни вправо, если хочешь сюда</p>
+                </div>
+            `;
+            
+            let startX = 0;
+            el.onmousedown = (e) => {
+                startX = e.clientX;
+                document.onmousemove = (ev) => {
+                    let x = ev.clientX - startX;
+                    el.style.transform = `translateX(${x}px) rotate(${x/15}deg)`;
+                };
+                document.onmouseup = (ev) => {
+                    let x = ev.clientX - startX;
+                    if (Math.abs(x) > 120) {
+                        el.style.transition = '0.5s';
+                        el.style.transform = `translateX(${x > 0 ? 500 : -500}px) rotate(${x/5}deg)`;
+                        if (x > 0) showMatch(data.name);
+                        setTimeout(() => el.remove(), 300);
+                    } else {
+                        el.style.transform = '';
+                    }
+                    document.onmousemove = null;
+                };
+            };
+            return el;
+        }
+
+        function showMatch(name) {
+            matchRes.style.display = 'block';
+            document.getElementById('matchName').innerText = name;
+        }
+
+        ideas.forEach(item => root.appendChild(createCard(item)));
+    </script>
+</body>
+</html>
